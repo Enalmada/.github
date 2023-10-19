@@ -4,7 +4,6 @@
     "config:js-lib",
     ":automergeMajor",
     "schedule:automergeEarlyMondays",
-    "group:all"
   ],
   "packageRules": [
     {
