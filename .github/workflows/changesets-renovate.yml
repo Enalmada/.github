@@ -1,4 +1,4 @@
-name: Shared Changeset for Renovate Workflow
+name: Generate changeset for Renovate
 
 on:
   workflow_call:
