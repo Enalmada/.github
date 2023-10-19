@@ -2,6 +2,13 @@ name: Shared Release Workflow
 
 on:
   workflow_call:
+    inputs:
+      npm_token:
+        required: true
+        type: string
+    secrets:
+      npm_token:
+        required: true
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -11,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -28,4 +35,4 @@ jobs:
           publish: bun release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.npm_token }}  # lowercase here is intentional
