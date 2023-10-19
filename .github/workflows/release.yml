@@ -2,10 +2,6 @@ name: Shared Release Workflow
 
 on:
   workflow_call:
-    inputs:
-      npm_token:
-        required: true
-        type: string
     secrets:
       npm_token:
         required: true
@@ -35,4 +31,4 @@ jobs:
           publish: bun release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.npm_token }}  # lowercase here is intentional
+          NPM_TOKEN: ${{ secrets.npm_token }}  # Lowercase is important
