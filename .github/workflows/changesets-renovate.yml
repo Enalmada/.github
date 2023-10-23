@@ -24,8 +24,8 @@ jobs:
 
       - name: Git Identity
         run: |
-          git config --global user.name 'Renovate Bot'
-          git config --global user.email 'noreply@mend.io'
+          git config --global user.name 'renovate[bot]'
+          git config --global user.email '29139614+renovate[bot]@users.noreply.github.com'
 
       - name: Run changesets-renovate
         run: bunx @scaleway/changesets-renovate
