@@ -15,4 +15,4 @@ jobs:
       - run: bun run build
       - run: bun run test:unit
     outputs:
-      dummy: "done"
+      test-status: ${{ job.status }}
