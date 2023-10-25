@@ -14,3 +14,5 @@ jobs:
       - run: bun install
       - run: bun run build
       - run: bun run test:unit
+    outputs:
+      dummy: "done"
