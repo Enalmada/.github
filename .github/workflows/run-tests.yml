@@ -2,6 +2,9 @@ name: Shared Run Tests Workflow
 
 on:
   workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   build-and-test:
@@ -15,4 +18,4 @@ jobs:
       - run: bun run build
       - run: bun run test:unit
     outputs:
-      test-status: ${{ job.status }}
+      dummy: "done"
