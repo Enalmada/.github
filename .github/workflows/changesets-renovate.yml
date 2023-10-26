@@ -2,6 +2,12 @@ name: Generate changeset for Renovate
 
 on:
   workflow_call:
+    inputs:
+      working-directory:
+        description: 'Working directory for the job'
+        required: false
+        default: './'
+        type: string
 
 jobs:
   generate-changeset:
@@ -21,6 +27,7 @@ jobs:
 
       - name: Install Dependencies
         run: bun install
+        working-directory: ${{ inputs.working-directory }}
 
       - name: Git Identity
         run: |
@@ -29,3 +36,4 @@ jobs:
 
       - name: Run changesets-renovate
         run: bunx @scaleway/changesets-renovate
+        working-directory: ${{ inputs.working-directory }}
