@@ -2,17 +2,34 @@ name: Shared Run Tests Workflow
 
 on:
   workflow_call:
+    inputs:
+      working-directory:
+        description: 'Working directory for the job'
+        required: false
+        default: './'
+        type: string
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - run: bun install
-      - run: bun run build
-      - run: bun run test:unit
+
+      - name: Install Dependencies
+        run: bun install
+        working-directory: ${{ inputs.working-directory }}
+
+      - name: Build
+        run: bun run build
+        working-directory: ${{ inputs.working-directory }}
+
+      - name: Run Unit Tests
+        run: bun run test:unit
+        working-directory: ${{ inputs.working-directory }}
+
     outputs:
       dummy: "done"
