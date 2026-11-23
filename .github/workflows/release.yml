@@ -32,7 +32,7 @@ jobs:
         id: changesets
         uses: changesets/action@v2.1.2
         with:
-          publish: bun release
+          publish-script: bun release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.npm_token }}  # Lowercase is important
