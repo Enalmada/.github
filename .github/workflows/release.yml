@@ -19,6 +19,7 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '26.13.1'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2.2.0
@@ -36,3 +37,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.npm_token }}  # Lowercase is important
+          # changesets/action v2 no longer writes .npmrc from NPM_TOKEN; setup-node's registry-url
+          # writes one that reads NODE_AUTH_TOKEN
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
