@@ -1,10 +1,10 @@
 name: Shared Release Workflow
 
+# Publishes to npm with trusted publishing (OIDC): no npm token. The calling workflow must grant
+# `id-token: write` (plus `contents: write` and `pull-requests: write` for the Version Packages PR),
+# and the package needs a trusted publisher on npmjs.com that names the CALLING workflow's filename.
 on:
   workflow_call:
-    secrets:
-      npm_token:
-        required: true
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -12,6 +12,10 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v7.0.1
@@ -36,7 +40,3 @@ jobs:
           publish-script: bun release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.npm_token }}  # Lowercase is important
-          # changesets/action v2 no longer writes .npmrc from NPM_TOKEN; setup-node's registry-url
-          # writes one that reads NODE_AUTH_TOKEN
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
